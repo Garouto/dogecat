@@ -8,12 +8,49 @@ import { Menu, X } from 'lucide-react'
 export default function DogecatLanding() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (videoRef.current) {
+    // Show loader for 1 second
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (videoRef.current && !isLoading) {
       videoRef.current.play()
     }
-  }, [])
+  }, [isLoading])
+
+  // Social media links
+  const socialLinks = {
+    twitter: "https://twitter.com",
+    telegram: "https://telegram.org",
+    dextools: "https://dextools.io",
+    dexscreener: "https://dexscreener.com"
+  }
+
+  // Show loading screen
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+        <div className="w-full h-full flex items-center justify-center">
+          <Image
+            src="/loader.gif"
+            alt="Loading..."
+            width={800}
+            height={600}
+            className="w-full h-full object-cover"
+            priority
+            unoptimized
+          />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -53,13 +90,22 @@ export default function DogecatLanding() {
             {/* Desktop Navigation - Grouped in rounded container */}
             <nav className="hidden md:flex items-center">
               <div className="bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1">
-                <button className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                <button 
+                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors"
+                >
                   ABOUT
                 </button>
-                <button className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                <button 
+                  onClick={() => document.getElementById('how-to-buy')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors"
+                >
                   HOW TO BUY
                 </button>
-                <button className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                <button 
+                  onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-6 py-2 text-gray-800 rounded-full font-medium hover:bg-gray-100 transition-colors"
+                >
                   TOKENOMICS
                 </button>
               </div>
@@ -67,7 +113,10 @@ export default function DogecatLanding() {
 
             {/* Desktop Buy Now Button - Dark container */}
             <div className="hidden md:block bg-gray-900/95 backdrop-blur-sm rounded-full px-1 py-1">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium">
+              <Button 
+                onClick={() => window.open('https://raydium.io', '_blank')}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium"
+              >
                 BUY NOW
               </Button>
             </div>
@@ -104,20 +153,38 @@ export default function DogecatLanding() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-medium text-lg">
+            <Button 
+              onClick={() => window.open('https://raydium.io', '_blank')}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-medium text-lg"
+            >
               BUY NOW
             </Button>
             
             {/* Social Icons */}
             <div className="flex items-center space-x-4">
-              <button className="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-lg flex items-center justify-center transition-colors">
-                <img src="/icons/twitter.svg" alt="Twitter" className="w-6 h-6" />
+              <button 
+                onClick={() => window.open(socialLinks.twitter, '_blank')}
+                className="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-lg flex items-center justify-center transition-colors"
+              >
+                <Image src="/icons/twitter.svg" alt="Twitter" width={24} height={24} className="w-6 h-6" />
               </button>
-              <button className="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center justify-center transition-colors">
-                <img src="/icons/telegram.svg" alt="Telegram" className="w-6 h-6" />
+              <button 
+                onClick={() => window.open(socialLinks.telegram, '_blank')}
+                className="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center justify-center transition-colors"
+              >
+                <Image src="/icons/telegram.svg" alt="Telegram" width={24} height={24} className="w-6 h-6" />
               </button>
-              <button className="w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center justify-center transition-colors">
-                <img src="/icons/dextools.svg" alt="DexTools" className="w-6 h-6" />
+              <button 
+                onClick={() => window.open(socialLinks.dextools, '_blank')}
+                className="w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center justify-center transition-colors"
+              >
+                <Image src="/icons/dextools.svg" alt="DexTools" width={24} height={24} className="w-6 h-6" />
+              </button>
+              <button 
+                onClick={() => window.open(socialLinks.dexscreener, '_blank')}
+                className="w-12 h-12 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center justify-center transition-colors"
+              >
+                <Image src="/icons/dexscreener.svg" alt="DexScreener" width={24} height={24} className="w-6 h-6" />
               </button>
             </div>
           </div>
@@ -125,7 +192,7 @@ export default function DogecatLanding() {
       </main>
 
       {/* About Section */}
-      <section className="relative z-10 min-h-screen">
+      <section id="about" className="relative z-10 min-h-screen">
         <div className="container mx-auto px-4 py-16 flex flex-col lg:flex-row items-center min-h-screen">
           {/* Left Side - Text Content */}
           <div className="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
@@ -142,7 +209,10 @@ export default function DogecatLanding() {
               HAPPIER FUTURE IN THE MOON.
             </p>
 
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-bold text-lg">
+            <Button 
+              onClick={() => window.open('https://raydium.io', '_blank')}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-bold text-lg"
+            >
               BUY NOW
             </Button>
           </div>
@@ -161,7 +231,7 @@ export default function DogecatLanding() {
       </section>
 
       {/* How to Buy Section */}
-      <section className="relative z-10 min-h-screen">
+      <section id="how-to-buy" className="relative z-10 min-h-screen">
         <div className="container mx-auto px-4 py-16 min-h-screen flex items-center">
           {/* Comic Book Style Container */}
           <div className="w-full relative">
@@ -279,6 +349,194 @@ export default function DogecatLanding() {
         </div>
       </section>
 
+      {/* Join Us Section */}
+      <section className="relative z-10 min-h-screen">
+        <div className="container mx-auto px-4 py-16 min-h-screen flex items-center">
+          <div className="w-full relative">
+            {/* Content Container */}
+            <div className="flex flex-col lg:flex-row items-center justify-center p-8 lg:p-16 min-h-[600px]">
+              {/* Large JOIN US Text */}
+              <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+                <h2 className="text-6xl md:text-8xl lg:text-9xl font-black text-orange-500 drop-shadow-2xl tracking-wider">
+                  JOIN US
+                </h2>
+              </div>
+
+              {/* Left Side - DOGECAT Character */}
+              <div className="lg:w-1/2 flex justify-center lg:justify-start mt-20 lg:mt-0">
+                <div className="relative">
+                  <Image
+                    src="/img3.png"
+                    alt="Happy DOGECAT with colorful clips and sports jersey"
+                    width={400}
+                    height={400}
+                    className="w-80 h-80 lg:w-96 lg:h-96 drop-shadow-2xl"
+                  />
+                </div>
+              </div>
+
+              {/* Right Side - Call to Action */}
+              <div className="lg:w-1/2 flex flex-col items-center lg:items-end justify-center mt-8 lg:mt-0">
+                {/* Action Buttons */}
+                <div className="flex flex-col items-center space-y-4">
+                  <Button 
+                    onClick={() => window.open('https://raydium.io', '_blank')}
+                    className="bg-black hover:bg-gray-800 text-white px-12 py-4 rounded-full font-bold text-xl shadow-2xl"
+                  >
+                    BUY NOW
+                  </Button>
+                  
+                  {/* Social Media Buttons */}
+                  <div className="flex items-center space-x-4">
+                    <button 
+                      onClick={() => window.open(socialLinks.twitter, '_blank')}
+                      className="w-16 h-16 bg-black hover:bg-gray-800 text-white rounded-2xl flex items-center justify-center transition-colors shadow-xl"
+                    >
+                      <Image src="/icons/twitter.svg" alt="Twitter" width={32} height={32} className="w-8 h-8" />
+                    </button>
+                    <button 
+                      onClick={() => window.open(socialLinks.telegram, '_blank')}
+                      className="w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl flex items-center justify-center transition-colors shadow-xl"
+                    >
+                      <Image src="/icons/telegram.svg" alt="Telegram" width={32} height={32} className="w-8 h-8" />
+                    </button>
+                    <button 
+                      onClick={() => window.open(socialLinks.dextools, '_blank')}
+                      className="w-16 h-16 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl flex items-center justify-center transition-colors shadow-xl"
+                    >
+                      <Image src="/icons/dextools.svg" alt="DexTools" width={32} height={32} className="w-8 h-8" />
+                    </button>
+                    <button 
+                      onClick={() => window.open(socialLinks.dexscreener, '_blank')}
+                      className="w-16 h-16 bg-green-600 hover:bg-green-700 text-white rounded-2xl flex items-center justify-center transition-colors shadow-xl"
+                    >
+                      <Image src="/icons/dexscreener.svg" alt="DexScreener" width={32} height={32} className="w-8 h-8" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer id="footer" className="relative z-10">
+        <div className="w-full relative overflow-hidden">
+          {/* Orange Gradient Background */}
+          <div className="bg-gradient-to-r from-orange-400 to-orange-500 relative">
+            {/* Paw Print Background Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              {/* Large paw prints scattered across the background */}
+              <div className="absolute top-8 left-16 w-16 h-16 opacity-30">
+                <div className="relative">
+                  {/* Main pad */}
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-6 bg-orange-600 rounded-full"></div>
+                  {/* Toes */}
+                  <div className="absolute top-0 left-2 w-3 h-4 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 left-6 w-3 h-4 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 right-6 w-3 h-4 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-0 right-2 w-3 h-4 bg-orange-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="absolute top-20 right-20 w-12 h-12 opacity-25">
+                <div className="relative">
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-5 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-0 left-1 w-2 h-3 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 left-4 w-2 h-3 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 right-4 w-2 h-3 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-0 right-1 w-2 h-3 bg-orange-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="absolute bottom-16 left-1/3 w-14 h-14 opacity-20">
+                <div className="relative">
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-7 h-5 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-0 left-2 w-2.5 h-3.5 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 left-5 w-2.5 h-3.5 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-1 right-5 w-2.5 h-3.5 bg-orange-600 rounded-full"></div>
+                  <div className="absolute top-0 right-2 w-2.5 h-3.5 bg-orange-600 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Container */}
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-8 lg:px-16 py-12">
+              {/* Left Side - Navigation Links */}
+              <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
+                {/* Navigation Text */}
+                <div className="text-center lg:text-left mb-6">
+                  <button
+                    onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="block text-4xl lg:text-6xl font-black text-white mb-2 hover:text-gray-200 transition-colors cursor-pointer"
+                    style={{
+                      textShadow: '3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000'
+                    }}
+                  >
+                    ABOUT
+                  </button>
+                  <button
+                    onClick={() => document.getElementById('how-to-buy')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="block text-4xl lg:text-6xl font-black text-white mb-2 hover:text-gray-200 transition-colors cursor-pointer"
+                    style={{
+                      textShadow: '3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000'
+                    }}
+                  >
+                    HOW TO BUY
+                  </button>
+                  <h3 className="text-4xl lg:text-6xl font-black text-white" style={{
+                    textShadow: '3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000'
+                  }}>
+                    TOKENOMICS
+                  </h3>
+                </div>
+
+                {/* Social Media Icons */}
+                <div className="flex items-center space-x-4">
+                  <button 
+                    onClick={() => window.open(socialLinks.twitter, '_blank')}
+                    className="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-lg flex items-center justify-center transition-colors"
+                  >
+                    <Image src="/icons/twitter.svg" alt="Twitter" width={24} height={24} className="w-6 h-6" />
+                  </button>
+                  <button 
+                    onClick={() => window.open(socialLinks.telegram, '_blank')}
+                    className="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-lg flex items-center justify-center transition-colors"
+                  >
+                    <Image src="/icons/telegram.svg" alt="Telegram" width={24} height={24} className="w-6 h-6" />
+                  </button>
+                  <button 
+                    onClick={() => window.open(socialLinks.dextools, '_blank')}
+                    className="w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center justify-center transition-colors"
+                  >
+                    <Image src="/icons/dextools.svg" alt="DexTools" width={24} height={24} className="w-6 h-6" />
+                  </button>
+                  <button 
+                    onClick={() => window.open(socialLinks.dexscreener, '_blank')}
+                    className="w-12 h-12 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center justify-center transition-colors"
+                  >
+                    <Image src="/icons/dexscreener.svg" alt="DexScreener" width={24} height={24} className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Side - Firefighter DOGECAT */}
+              <div className="flex justify-center lg:justify-end">
+                <Image
+                  src="/img4.png"
+                  alt="DOGECAT Firefighter with helmet and uniform"
+                  width={400}
+                  height={400}
+                  className="w-64 h-64 lg:w-80 lg:h-80 drop-shadow-2xl"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Black Bottom Bar */}
+          <div className="bg-black h-4 w-full"></div>
+        </div>
+      </footer>
+
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
@@ -314,16 +572,37 @@ export default function DogecatLanding() {
             {/* Menu Items */}
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mx-4">
               <div className="flex flex-col items-center space-y-6">
-                <button className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
+                >
                   ABOUT
                 </button>
-                <button className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    document.getElementById('how-to-buy')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
+                >
                   HOW TO BUY
                 </button>
-                <button className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
+                >
                   TOKENOMICS
                 </button>
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-bold text-lg mt-4">
+                <Button 
+                  onClick={() => window.open('https://raydium.io', '_blank')}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-bold text-lg mt-4"
+                >
                   BUY NOW
                 </Button>
               </div>
