@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   title: 'DOGECAT',
   description: 'DOGECAT combines the best of both worlds',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.png',
   },
-    generator: 't.me/plebeu'
+  generator: 't.me/plebeu'
 }
 
 export default function RootLayout({
