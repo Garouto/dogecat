@@ -5,12 +5,12 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DOGECAT - The Ultimate Meme Token',
-  description: 'DOGECAT combines the best of both worlds - the loyalty of dogs and the independence of cats in one amazing meme token.',
+  title: 'DOGECAT',
+  description: 'DOGECAT combines the best of both worlds',
   icons: {
     icon: '/favicon.ico',
   },
-    generator: 'v0.dev'
+    generator: 't.me/plebeu'
 }
 
 export default function RootLayout({
