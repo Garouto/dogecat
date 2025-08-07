@@ -30,10 +30,10 @@ export default function DogecatLanding() {
 
   // Social media links
   const socialLinks = {
-    twitter: "https://twitter.com",
-    telegram: "https://telegram.org",
-    dextools: "https://dextools.io",
-    dexscreener: "https://dexscreener.com"
+    twitter: "https://x.com/i/communities/1953339197391061424",
+    telegram: "https://t.me/dogecatcoinportal",
+    dextools: "https://www.dextools.io/app/en/token/dogecatsolana?t=1754556621860",
+    dexscreener: "https://dexscreener.com/solana/EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk"
   }
 
   // Show loading screen
@@ -120,7 +120,7 @@ export default function DogecatLanding() {
             {/* Desktop Buy Now Button - Dark container */}
             <div className="hidden md:block bg-gray-900/95 backdrop-blur-sm rounded-full px-1 py-1 shadow-lg hover:shadow-purple-500/30 transition-all duration-300">
               <Button 
-                onClick={() => window.open('https://raydium.io', '_blank')}
+                onClick={() => window.open('https://raydium.io/swap/?inputMint=EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk&outputMint=sol', '_blank')}
                 className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 active:scale-95 relative overflow-hidden group"
               >
                 <span className="relative z-10">BUY NOW</span>
@@ -169,7 +169,7 @@ export default function DogecatLanding() {
           {/* Action Buttons */}
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
             <Button 
-              onClick={() => window.open('https://raydium.io', '_blank')}
+              onClick={() => window.open('https://raydium.io/swap/?inputMint=EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk&outputMint=sol', '_blank')}
               className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-8 py-3 rounded-full font-medium text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 active:scale-95 relative overflow-hidden group"
             >
               <span className="relative z-10 transition-all duration-300 group-hover:scale-110">BUY NOW</span>
@@ -231,7 +231,7 @@ export default function DogecatLanding() {
             </p>
 
             <Button 
-              onClick={() => window.open('https://raydium.io', '_blank')}
+              onClick={() => window.open('https://raydium.io/swap/?inputMint=EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk&outputMint=sol', '_blank')}
               className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 active:scale-95 relative overflow-hidden group"
             >
               <span className="relative z-10">BUY NOW</span>
@@ -421,7 +421,7 @@ export default function DogecatLanding() {
                 {/* Action Buttons */}
                 <div className="flex flex-col items-center space-y-4">
                   <Button 
-                    onClick={() => window.open('https://raydium.io', '_blank')}
+                    onClick={() => window.open('https://raydium.io/swap/?inputMint=EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk&outputMint=sol', '_blank')}
                     className="bg-black hover:bg-gray-800 text-white px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-3xl hover:shadow-black/50 active:scale-95 relative overflow-hidden group"
                   >
                     <span className="relative z-10">BUY NOW</span>
@@ -660,7 +660,7 @@ export default function DogecatLanding() {
                   TOKENOMICS
                 </button>
                 <Button 
-                  onClick={() => window.open('https://raydium.io', '_blank')}
+                  onClick={() => window.open('https://raydium.io/swap/?inputMint=EzSbxUqkYUb1jU7MnmNurwmFqfFNm8Qoe2GmBpr5bonk&outputMint=sol', '_blank')}
                   className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg mt-4 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 active:scale-95 relative overflow-hidden group"
                 >
                   <span className="relative z-10">BUY NOW</span>
